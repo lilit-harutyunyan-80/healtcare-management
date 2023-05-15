@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Patient</title>
+</head>
+<body>
+<a href="/patients">Back</a>
+<h2 th:text="${patient.name}"></h2>
+<h2 th:text="${patient.surname}"></h2>
+<img th:if="${patient.getImgName() !=null}" th:src="@{/getImage(imageName=${patient.getImgName()})}" width="400"/>
+<span th:if="${patient.doctor != null}" th:text="${patient.doctor.name}"></span>
+
+<form action="/patients/appointment/add" method="post">
+    <input type="hidden" name="patient.id"  th:value="${patient.id}"/>
+    <textarea name="appointment"></textarea>
+    <input type="submit" value="add">
+</form>
+
+<div th:each="appointment : ${appointments}">
+   Patient: <span th:text="${appointment.getPatient}"></span>
+    Date: <span th:text="${appointment.getDateTime}"></span>
+</div>
+</body>
+</html>

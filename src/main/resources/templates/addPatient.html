@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Patient</title>
+</head>
+<body>
+<form action="/patients/add" method="post" enctype="multipart/form-data">
+    <input type="text" name="name"><br>
+    <input type="text" name="surname"><br>
+    <input type="text" name="dateOfBirthday" REQUIRED><br>
+    <select name="doctor">
+        <option th:each="doctor: ${doctors}"
+                th:text="${doctor.name}" th:value="${doctor.id}">
+        </option>
+    </select><br>
+    <input type="file" name="image">
+    <input type="submit" value="create">
+</form>
+</body>
+</html>
