@@ -16,6 +16,10 @@ public class Patient {
 
     @ManyToOne
     private Doctor doctor;
+
+    @ManyToOne
+    private User user;
+
     private String name;
     private String surname;
     private Date dateOfBirthday;

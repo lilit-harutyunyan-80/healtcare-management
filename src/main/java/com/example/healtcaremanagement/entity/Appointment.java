@@ -21,4 +21,7 @@ public class Appointment {
 
     @ManyToOne
     private Doctor doctor;
+
+    @ManyToOne
+    private User user;
 }

@@ -7,31 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/doctors")
 public class DoctorController {
 
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("/doctors")
+    @GetMapping
     public String doctorsPage(ModelMap modelMap) {
         List<Doctor> all = doctorRepository.findAll();
         modelMap.addAttribute("doctors", all);
         return "doctors";
     }
 
-    @GetMapping("/doctors/add")
+    @GetMapping("/add")
     public String addDoctorPage(){
         return "addDoctor";
     }
 
-    @PostMapping("/doctors/add")
+    @PostMapping("/add")
     public String addDoctor(@RequestParam("name") String name, String surname,
-                            String email, String specialty, int phoneNumber, String profilePic){
+                            String email, String specialty, String phoneNumber, String profilePic){
         Doctor doctor = new Doctor();
         doctor.setName(name);
         doctor.setSurname(surname);
@@ -43,7 +45,7 @@ public class DoctorController {
         return "redirect:/doctors";
     }
 
-    @GetMapping("/doctors/remove")
+    @GetMapping("/remove")
     public String removeDoctor(@RequestParam("id") int id) {
         doctorRepository.deleteById(id);
         return "redirect:/doctors";
